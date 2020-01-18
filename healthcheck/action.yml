@@ -1,0 +1,20 @@
+name: Healthcheck
+description: Check connection to a single URL
+inputs:
+    url:
+        description: URL to connect to
+        required: true
+    username:
+        description: Username for basic auth
+        required: false
+    password:
+        description: Password for basic auth
+        required: false
+runs:
+    using: docker
+    image: Dockerfile
+    args:
+        - ${{ inputs.url }}
+        - ${{ inputs.username }}
+        - ${{ inputs.password }}
+        
