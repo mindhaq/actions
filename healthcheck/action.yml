@@ -4,6 +4,10 @@ inputs:
     url:
         description: URL to connect to
         required: true
+    retries:
+        description: Number of retries before failing
+        required: false
+        default: '5'
     username:
         description: Username for basic auth
         required: false
@@ -15,6 +19,7 @@ runs:
     image: Dockerfile
     args:
         - ${{ inputs.url }}
+        - ${{ inputs.retries }}
         - ${{ inputs.username }}
         - ${{ inputs.password }}
         

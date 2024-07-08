@@ -1,14 +1,16 @@
 #!/bin/sh -l
 
-if [ $# -eq 0 ] ; then
-    echo "Usage: $0 url [user] [password]"
+if [ $# -lt 2 ] ; then
+    echo "Usage: $0 url retries [user] [password]"
     exit 1
 fi
 
-curloptions="-sS --retry 5 --fail"
+curloptions="--output /dev/null -silent --show-error --retry $2 --fail"
 
-if [ $# -eq 3 ] ; then
-    curloptions="$curloptions -u $2:$3"
+if [ $# -eq 4 ] ; then
+    curloptions="$curloptions --user $3:$4"
 fi
 
-curl $curloptions $1 -o /dev/null
+curl $curloptions $1 || exit 1
+
+echo Health check for $1 successful.
