@@ -1,5 +1,9 @@
 name: Healthcheck
+author: Rüdiger Schulz
 description: Check connection to a single URL
+branding:
+    color: red
+    icon: heart
 inputs:
     url:
         description: URL to connect to
